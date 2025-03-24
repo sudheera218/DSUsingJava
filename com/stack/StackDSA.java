@@ -2,75 +2,83 @@ package com.stack;
 
 public class StackDSA {
 
-    int[] stackStorage;
-    int top;
     int capacity;
+    int[] stackArray;
+    int top;
 
     // Constructor
-    public StackDSA(int capacity) {
+    StackDSA(int capacity) {
         this.capacity = capacity;
-        this.stackStorage = new int[capacity];
-        this.top = -1;
+        stackArray = new int[capacity];
+        top = -1;
     }
 
-    // Check if stack is full
-    public boolean isStackFull() {
+    // Push item to stack
+    void push(int item) {
+        if (isStackFull()) {
+            System.out.println("Stack is full. Cannot push " + item);
+        } else {
+            top++;
+            stackArray[top] = item;
+            System.out.println("Pushed: " + item);
+        }
+    }
+
+    // Pop top item
+    int pop() {
+        if (isStackEmpty()) {
+            System.out.println("Stack is empty. Nothing to pop.");
+            return -1;
+        } else {
+            int poppedItem = stackArray[top];
+            top--;
+            return poppedItem;
+        }
+    }
+
+    // Peek at top item
+    int peek() {
+        if (isStackEmpty()) {
+            System.out.println("Stack is empty. Nothing to peek.");
+            return -1;
+        } else {
+            return stackArray[top];
+        }
+    }
+
+    // Check if full
+    boolean isStackFull() {
         return top == capacity - 1;
     }
 
-    // Check if stack is empty
-    public boolean isStackEmpty() {
+    // Check if empty
+    boolean isStackEmpty() {
         return top == -1;
     }
 
-    // Push element to stack
-    public boolean push(int item) {
-        if (isStackFull()) {
-            System.out.println("Stack Overflow! Cannot push: " + item);
-            return false;
-        }
-        stackStorage[++top] = item;
-        System.out.println("Pushed: " + item);
-        return true;
-    }
+    // Show current stack
+    void print() {
+        System.out.println("Stack Capacity: " + capacity);
+        System.out.println("Top Index     : " + top);
 
-    // Pop element from stack
-    public int pop() {
-        if (isStackEmpty()) {
-            System.out.println("Stack Underflow! Nothing to pop.");
-            return -1;
-        }
-        return stackStorage[top--];
-    }
-
-    // Peek top element
-    public int peek() {
-        if (isStackEmpty()) {
-            System.out.println("Stack is empty!");
-            return -1;
-        }
-        return stackStorage[top];
-    }
-
-    // Print stack contents
-    public void printStack() {
         if (isStackEmpty()) {
             System.out.println("Stack is empty.");
             return;
         }
-        System.out.print("Stack elements (bottom → top): ");
-        for (int i = 0; i <= top; i++) {
-            System.out.print(stackStorage[i] + " ");
+
+        System.out.println("Stack items (top to bottom):");
+        for (int i = top; i >= 0; i--) {
+            System.out.println(stackArray[i]);
         }
-        System.out.println();
     }
 
-    // Getters for top and capacity
-    public int getTop() {
+    // Return top index
+    int getTop() {
         return top;
     }
 
-    public int getCapacity() {
+    // Return capacity
+    int getCapacity() {
         return capacity;
     }
 }

@@ -14,7 +14,6 @@ public class StackDSATest {
 
         int choice;
         int item;
-
         do {
             System.out.println("\n========= Stack Menu =========");
             System.out.println("1. Push");
